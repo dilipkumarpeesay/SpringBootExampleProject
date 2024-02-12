@@ -3,7 +3,6 @@ package com.bankingApplication.BankingApplication.controller;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -20,9 +19,13 @@ import com.bankingApplication.BankingApplication.service.AccountService;
 @RestController
 public class AccountController {
 	
-	@Autowired
 	private AccountService accountService;
 	
+	public AccountController(AccountService accountService) {
+		super();
+		this.accountService = accountService;
+	}
+
 	@PostMapping("/api/accounts")
 	private ResponseEntity<AccountDto> createAccount(@RequestBody AccountDto accountDto){
 		return new ResponseEntity<>(accountService.createAccount(accountDto), HttpStatus.CREATED);
